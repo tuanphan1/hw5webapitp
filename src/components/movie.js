@@ -26,7 +26,7 @@ class Movie extends Component {
             );
         };
 
-        const ReviewInfo = ({reviews=[]}) => {
+        const ReviewInfo = ({reviews}) => {
             return reviews.map((review, i) =>
                 <p key={i}>
                 <b>{review.reviewer}</b> {review.quote}
@@ -48,7 +48,7 @@ class Movie extends Component {
                         <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
                         <ListGroupItem><h4><Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4></ListGroupItem>
                     </ListGroup>
-                    <Panel.Body><ReviewInfo reviews={currentMovie.reviews} /></Panel.Body>
+                    <Panel.Body><ReviewInfo reviews={currentMovie.review} /></Panel.Body>
                 </Panel>
             );
         };
