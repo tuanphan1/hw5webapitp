@@ -1,37 +1,37 @@
 import actionTypes from '../constants/actionTypes';
 import runtimeEnv from '@mars/heroku-js-runtime-env';
 
-function moviesFetched(movies){
+function reviewsFetched(reviews){
     return {
-        type: actionTypes.FETCH_MOVIES,
-        movies: movies
+        type: actionTypes.FETCH_REVIEWS,
+        reviews: reviews
     }
 }
 
-function movieFetched(movie){
+function reviewFetched(review){
     return {
-        type: actionTypes.FETCH_MOVIE,
-        selectedMovie: movie
+        type: actionTypes.FETCH_REVIEW,
+        selectedReview: review
     }
 }
 
-function movieSet(movie){
+function reviewSet(review){
     return {
-        type: actionTypes.SET_MOVIE,
-        selectedMovie: movie
+        type: actionTypes.SET_REVIEW,
+        selectedReview: review
     }
 }
 
-export function setMovie(movie) {
+export function setReview(review) {
     return dispatch => {
-        dispatch(movieSet(movie));
+        dispatch(reviewSet(review));
     }
 }
 
-export function fetchMovies(){
+export function fetchReviews(){
     const env = runtimeEnv();
     return dispatch => {
-        return fetch(`${env.REACT_APP_API_URL}/movies?reviews=true`, {
+        return fetch(`${env.REACT_APP_API_URL}/reviews`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -46,16 +46,16 @@ export function fetchMovies(){
                 return response.json();
             })
             .then( (res) => {
-                dispatch(moviesFetched(res));
+                dispatch(reviewsFetched(res));
             })
             .catch( (e) => console.log(e) );
     }
 }
 
-export function fetchMovie(movieId){
+export function fetchReview(movieId){
     const env = runtimeEnv();
     return dispatch => {
-        return fetch(`${env.REACT_APP_API_URL}/${movieId}?reviews=true`, {
+        return fetch(`${env.REACT_APP_API_URL}/movie/${movieId}?reviews=true`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -70,7 +70,7 @@ export function fetchMovie(movieId){
                 return response.json();
             })
             .then( (res) => {
-                dispatch(movieFetched(res));
+                dispatch(reviewFetched(res));
             })
             .catch( (e) => console.log(e) );
     }

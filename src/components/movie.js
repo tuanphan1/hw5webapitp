@@ -4,6 +4,7 @@ import { Glyphicon, Panel, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { Image } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 import {fetchMovie} from "../actions/movieActions";
+import {fetchReview} from "../actions/reviewActions";
 
 //support routing by creating a new component
 
@@ -12,7 +13,8 @@ class Movie extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
         if (this.props.selectedMovie == null)
-            dispatch(fetchMovie(this.props.movieId));
+            dispatch(fetchMovie(this.props.movieId))
+            dispatch(fetchReview(this.props.movieId))
     }
 
     render() {
@@ -24,11 +26,11 @@ class Movie extends Component {
             );
         };
 
-        const ReviewInfo = ({reviews}) => {
+        const ReviewInfo = ({reviews=[]}) => {
             return reviews.map((review, i) =>
                 <p key={i}>
-                <b>{review.username}</b> {review.review}
-                    <Glyphicon glyph={'star'} /> {review.rating}
+                <b>{review.reviewer}</b> {review.quote}
+                    <Glyphicon glyph={'star'} /> {review.rate}
                 </p>
             );
         }
@@ -40,7 +42,7 @@ class Movie extends Component {
             return (
                 <Panel>
                     <Panel.Heading>Movie Detail</Panel.Heading>
-                    <Panel.Body><Image className="image" src={currentMovie.imageUrl} thumbnail /></Panel.Body>
+                    <Panel.Body><Image className="image" src={currentMovie.imageURL} thumbnail /></Panel.Body>
                     <ListGroup>
                         <ListGroupItem>{currentMovie.title}</ListGroupItem>
                         <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
@@ -60,6 +62,8 @@ const mapStateToProps = (state, ownProps) => {
     console.log(ownProps);
     return {
         selectedMovie: state.movie.selectedMovie,
+        selectedReview: state.review.selectedReview,
+        //selectedReviews: state.reviews.selectedReviews,
         movieId: ownProps.match.params.movieId
     }
 }
