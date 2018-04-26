@@ -60,7 +60,11 @@ class Movie extends Component {
 
                                 </Col>
                             </FormGroup>
+                            <FormControl
+                                type="text"
 
+                                placeholder="Enter quote"
+                            />
                             <FormGroup controlId="password">
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Star Rating 1 - 5
@@ -69,7 +73,12 @@ class Movie extends Component {
 
                                 </Col>
                             </FormGroup>
+                            <FormControl
+                                type="text"
 
+                                placeholder="Enter rating 1 - 5"
+
+                            />
                             <FormGroup>
                                 <Col smOffset={2} sm={10}>
                                     <Button>Submit</Button>
