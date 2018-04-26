@@ -40,7 +40,7 @@ class Login extends Component {
                         Email
                     </Col>
                     <Col sm={10}>
-                        <FormControl onChange={this.updateDetails} value={this.state.details.username} type="email" placeholder="Email" />
+                        <FormControl onChange={this.updateDetails} value={this.state.details.username} type="user" placeholder="Enter Username" />
                     </Col>
                 </FormGroup>
 
@@ -49,7 +49,7 @@ class Login extends Component {
                         Password
                     </Col>
                     <Col sm={10}>
-                        <FormControl onChange={this.updateDetails} value={this.state.details.password} type="password" placeholder="Password" />
+                        <FormControl onChange={this.updateDetails} value={this.state.details.password} type="password" placeholder=" Enter Password" />
                     </Col>
                 </FormGroup>
 
