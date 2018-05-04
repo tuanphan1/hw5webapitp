@@ -18,10 +18,10 @@ class Movie extends Component {
         this.review = this.review.bind(this);
         this.state = {
             details:{
-                username: '',
+                reviewer: '',
                 movie: '',
                 quote: '',
-                rate: ''
+                rating: ''
             }
         };
     }
@@ -44,7 +44,6 @@ class Movie extends Component {
         const {dispatch} = this.props;
         if (this.props.selectedMovie == null)
             dispatch(fetchMovie(this.props.movieId))
-            //dispatch(fetchReview(this.props.movieId))
     }
 
     render() {
@@ -71,42 +70,6 @@ class Movie extends Component {
             }
             return (
                 <Panel>
-                    <Form horizontal>
-                        <FormGroup controlId="quote">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Quote
-                            </Col>
-                            <Col sm={10}>
-                                <FormControl
-                                    // onChange={this.updateDetails}
-                                    // value={this.state.details.quote}
-                                    type="text"
-                                    placeholder=" Enter Quote"
-                                />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup controlId="rating">
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Star Rating 1 - 5
-                            </Col>
-                            <Col sm={10}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.details.rate}
-                                    placeholder="Enter rating 1 - 5"
-                                    onChange={this.updateDetails}
-
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-
-                            <Col smOffset={2} sm={10}>
-                                <Button>Submit</Button>
-                            </Col>
-                        </FormGroup>
-                    </Form>
                     <Panel.Heading>Movie Detail</Panel.Heading>
 
                     <Panel.Body><Image className="image" src={currentMovie.imageURL} thumbnail /></Panel.Body>
@@ -122,7 +85,47 @@ class Movie extends Component {
             );
         };
         return (
+        <div>
+            <Panel>
+                <Form horizontal>
+                    <FormGroup controlId="quote">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Quote
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl
+                                onChange={this.updateDetails}
+                                value={this.state.details.quote}
+                                type="text"
+                                placeholder=" Enter Quote"
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup controlId="rating">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Star Rating 1 - 5
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl
+                                type="text"
+                                value={this.state.details.rating}
+                                placeholder="Enter rating 1 - 5"
+                                onChange={this.updateDetails}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+
+                        <Col smOffset={2} sm={10}>
+                            <Button onClick={this.review}>Submit</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+            </Panel>
+
             <DetailInfo currentMovie={this.props.selectedMovie} />
+        </div>
         );
     }
 }

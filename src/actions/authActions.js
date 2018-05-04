@@ -43,6 +43,7 @@ export function submitLogin(data){
 
 export function submitRegister(data){
     const env = runtimeEnv();
+    JSON.stringify(data);
     return dispatch => {
         return fetch(`${env.REACT_APP_API_URL}/signup`, {
             method: 'POST',

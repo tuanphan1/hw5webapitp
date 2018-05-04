@@ -79,6 +79,8 @@ export function fetchMovie(movieId){
 
 export function submitReview(movieId,data){
     const env = runtimeEnv();
+    data.reviewer = localStorage.getItem('username');
+    JSON.stringify(data);
     return dispatch => {
         return fetch(`${env.REACT_APP_API_URL}/review/${movieId}`, {
             method: 'POST',
@@ -87,9 +89,7 @@ export function submitReview(movieId,data){
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             },
-            body: {
-                usenname: localStorage.getItem('username'),
-            },
+            body: JSON.stringify(data),
             mode: 'cors'})
             .then( (response) => {
                 if (!response.ok) {
